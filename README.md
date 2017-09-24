@@ -1,4 +1,5 @@
-<!-- vim:ft=markdown: -->
+<!-- vim: ft=markdown:
+-->
 # Searchzin
 
 A simple search engine implementation.
@@ -51,16 +52,15 @@ Most of the project toolchain is managed by the
 [`Makefile`](https://github.com/mateusduboli/searchzin/tree/master/Makefile),
 the important targets are:
 
+* `install`: Install `dep` and ensure dependencies
 * `readme`: Performs `README.md` inclusion of files
 * `lint`: Performs linting and formatting of the code
 * `test`: Well, compile and run unit tests
-* `watch`: Performs `lint` and `test` on file modification
-* `func-test`: Performs functional tests inside the `features` folder
+* `watch`: Performs `lint` and `test` on file modification (*TODO*)
+* `func-test`: Performs functional tests inside the `features` folder (*TODO*)
 * `run`: Runs a local instance
 * `release`: Creates a release version on the `dist` folder
-* `publish-docker`: Publishes the docker image in dockerhub
-* `publish-release`: Publishes the compiled version on github
-* `publish-all`: Does all both publishings
+* `publish`: Publishes the docker image in dockerhub
 
 ## Architecture
 
