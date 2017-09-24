@@ -18,4 +18,25 @@ run:
 
 release:
 	mkdir -p dist
-	go build -o dist/searchzin .
+	env GOOS=linux go build -o dist/searchzin .
+	docker build \
+		--force-rm \
+		--compress \
+		--pull \
+		--no-cache \
+		--tag "searchzin:dev" \
+		.
+
+clean:
+	go clean
+	rm -rf dist/
+	docker images -q "searchzin" | xargs docker rmi -f
+
+publish: clean release
+	$(eval version := $(shell git show -s --format=%h))
+	docker tag "searchzin:dev" "mateusduboli/searchzin:$(version)"
+	docker push "mateusduboli/searchzin:$(version)"
+
+publish-latest: publish
+	docker tag "searchzin" "mateusduboli/searchzin:latest"
+	docker push "mateusduboli/searchzin:latest"
