@@ -1,0 +1,4 @@
+port: 8080 # Service port
+path:
+  log: /var/log/searchzin # Log directory
+  data: /var/lib/searchzin # Data directory

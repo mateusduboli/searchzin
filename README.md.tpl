@@ -1,4 +1,5 @@
-<!-- vim:ft=markdown: -->
+<!-- vim: ft=markdown:
+-->
 # Searchzin
 
 A simple search engine implementation.
@@ -31,14 +32,7 @@ form `-C key=value`, the second form overrides the first.
 
 Configuration defaults:
 
-
-```yml
-port: 8080 # Service port
-path:
-  log: /var/log/searchzin # Log directory
-  data: /var/lib/searchzin # Data directory
-```
-
+<!-- include yml config/config.yml -->
 
 ## Development
 
