@@ -1,8 +1,11 @@
 test:
 	go test
 
-run:
-	go run cmd/searchzin.go
+dependencies:
+	dep ensure
+
+run: dependencies
+	go run main.go
 
 readme:
 	scripts/readme.sh
