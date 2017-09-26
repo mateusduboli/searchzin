@@ -64,6 +64,74 @@ the important targets are:
 
 ## Architecture
 
-On launching the app, 
+There are 6 main components to this search engine:
+* Document database
+* Index database
+* Indexing service
+* Query executor
+* Query planner
+* Query parser
 
-## Search Engine Algorithm
+Each component has a clear responsability in the system, and all of them work
+togheter to respond to queries and document indexing requests.
+
+### Document Database
+
+It's responsible to store and give id's to newly created documents. The
+constraints are:
+
+* Stores documents and their `id`s
+* Enables `id` generation with little to no collisions
+* Efective document storing algorithm, being optimized for fast reads and fast
+    enought writes
+* Aware of the underlying storage unit, being it `ssd` or `hdd`
+* Aware of the underlying linux page size and file caching strategy
+
+### Index database
+
+Given a new document understands it and saves it into the document database,
+after feeds the related indexes.
+
+* Knows which fields are indexed and how
+* Knows the document structure and can related that to the indexes
+
+Stores the relation between keywords and the documents related to them.
+
+* Stores `keyword` to document set relations
+* Enable `key` manipulation strategies for queries with keyword approximation
+* Optimized for low density keys with lots of documents
+* Aware of the underlying linux page size to easily fit and be loaded in-memory
+
+### Indexing service
+
+### Query parser
+
+Parses the user input and transforms it into a query plan using a tree-like
+data structure.
+
+* Parses a string given by the user and turns it into a graph
+* The DSL will be similar to [`lucene`'s](https://lucene.apache.org/)
+
+### Query planner
+
+Given a query tree, optimizes it being aware of the restrictions and the
+environment in which it will be executed.
+
+* Remove redundant results, making them available to all the steps that need
+* Aware of index size to sort which effective retrievals will be done first
+* Returns an ordered list of query nodes to be executed
+
+### Query executor
+
+After having a structured plan the query then retrieves effective data from the
+`index` database, this step is performed by the executor.
+
+* Knows how to query the index database
+* Joins the results given by it in a ordered fashion
+* Retrieves the documents
+* Stores the query results in a file to be queried later using "cold" storage
+
+## Query language
+
+This query language is heavily based on lucene's, to simplify design and
+understand what tradeoffs were made.
