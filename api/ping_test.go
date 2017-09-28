@@ -10,7 +10,7 @@ import (
 func request(path string) *httptest.ResponseRecorder {
 	r := gin.Default()
 	req, _ := http.NewRequest("GET", path, nil)
-	Ping(r)
+	ping(r)
 	w := httptest.NewRecorder()
 
 	r.ServeHTTP(w, req)
