@@ -1,3 +1,5 @@
+TEST_REGEX ?= '.'
+
 install:
 	which dep || brew install dep
 	which golint || go get -u github.com/golang/lint/golint
@@ -11,7 +13,7 @@ lint:
 	golint
 
 test:
-	go test -v ./...
+	go test -v -run ${TEST_REGEX} ./...
 
 run:
 	go run main.go
