@@ -1,4 +1,6 @@
 TEST_REGEX ?= '.'
+VERSION ?= $(shell git show -s --format=%h))
+APP_NAME ?= "mateusduboli/searchzin"
 
 install:
 	which dep || brew install dep
@@ -18,6 +20,9 @@ test:
 run:
 	go run main.go
 
+run-dev:
+	docker run -p 8080:8080 "${APP_NAME}:dev"
+
 release:
 	mkdir -p dist
 	env GOOS=linux go build -o dist/searchzin .
@@ -26,19 +31,24 @@ release:
 		--compress \
 		--pull \
 		--no-cache \
-		--tag "searchzin:dev" \
+		--tag "${APP_NAME}:${VERSION}" \
+		.
+
+release-dev:
+	mkdir -p dist
+	env GOOS=linux go build -o dist/searchzin .
+	docker build \
+		--tag "${APP_NAME}:dev" \
 		.
 
 clean:
 	go clean
 	rm -rf dist/
-	docker images -q "searchzin" | xargs docker rmi -f
+	docker images -q "${APP_NAME}" | xargs docker rmi -f
 
 publish: clean release
-	$(eval version := $(shell git show -s --format=%h))
-	docker tag "searchzin:dev" "mateusduboli/searchzin:$(version)"
-	docker push "mateusduboli/searchzin:$(version)"
+	docker push "${APP_NAME}:$(VERSION)"
 
 publish-latest: publish
-	docker tag "searchzin" "mateusduboli/searchzin:latest"
-	docker push "mateusduboli/searchzin:latest"
+	docker tag "${APP_NAME}:${VERSION}" "${APP_NAME}:latest"
+	docker push "${APP_NAME}:latest"
