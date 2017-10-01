@@ -49,11 +49,15 @@ the important targets are:
 * `readme`: Performs `README.md` inclusion of files
 * `lint`: Performs linting and formatting of the code
 * `test`: Well, compile and run unit tests
-* `watch`: Performs `lint` and `test` on file modification (*TODO*)
-* `func-test`: Performs functional tests inside the `features` folder (*TODO*)
-* `run`: Runs a local instance
+* `build`: Creates a `linux` distributable folder in `dist`
+* `run`: Runs a docker container with the `dist` executable
 * `release`: Creates a release version on the `dist` folder
-* `publish`: Publishes the docker image in dockerhub
+* `release-dev`: Creates a release version to be used in `run`
+* `publish`: Publishes the docker image in dockerhub using the git sha as
+    version
+* `publish-latest`: Publishes the docker image in dockerhub with the `latest` tag
+*  (*TODO*) `watch`: Performs `lint` and `test` on file modification
+*  (*TODO*) `func-test`: Performs functional tests inside the `features` folder
 
 ## Architecture
 

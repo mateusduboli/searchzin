@@ -17,15 +17,18 @@ lint:
 test:
 	go test -v -run ${TEST_REGEX} ./...
 
-run:
-	go run main.go
-
-run-dev:
-	docker run -p 8080:8080 "${APP_NAME}:dev"
-
-release:
+build:
 	mkdir -p dist
 	env GOOS=linux go build -o dist/searchzin .
+	cp -R templates dist/
+
+run:
+	docker run \
+		-p 8080:8080 \
+		-v "${PWD}/dist:/opt/searchzin" \
+		"${APP_NAME}:dev"
+
+release: clean build
 	docker build \
 		--force-rm \
 		--compress \
@@ -34,9 +37,7 @@ release:
 		--tag "${APP_NAME}:${VERSION}" \
 		.
 
-release-dev:
-	mkdir -p dist
-	env GOOS=linux go build -o dist/searchzin .
+release-dev: build
 	docker build \
 		--tag "${APP_NAME}:dev" \
 		.
