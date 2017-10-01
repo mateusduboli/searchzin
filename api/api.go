@@ -9,5 +9,6 @@ func Api(r *gin.Engine) {
 
 	v1 := r.Group("v1")
 	v1.GET("/ping", ping)
-	v1.POST("/documents", documentsSave)
+	v1.POST("/documents", documentSave)
+	v1.GET("/documents", documentList)
 }

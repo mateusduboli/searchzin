@@ -39,3 +39,7 @@ func IndexDocument(document Document) {
 		panic(err)
 	}
 }
+
+func ListDocuments() []Document {
+	return make([]Document, 0)
+}

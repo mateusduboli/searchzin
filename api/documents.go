@@ -5,9 +5,14 @@ import (
 	"github.com/mateusduboli/searchzin/indexer"
 )
 
-func documentsSave(c *gin.Context) {
+func documentSave(c *gin.Context) {
 	var document map[string]interface{}
 	c.BindJSON(&document)
 	indexer.IndexDocument(indexer.NewDocument(document))
 	c.JSON(200, document)
+}
+
+func documentList(c *gin.Context) {
+	documents := indexer.ListDocuments()
+	c.JSON(200, documents)
 }
