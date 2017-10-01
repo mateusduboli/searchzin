@@ -2,6 +2,7 @@ package indexer
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -12,15 +13,10 @@ const (
 )
 
 func IndexDocument(document Document) {
-	ex, err := os.Executable()
-	if err != nil {
-		panic(err)
-	}
-
-	dir := path.Dir(ex)
-	dataFolder := path.Join(dir, DATA_FOLDER)
+	log.Printf("Indexing document [%s]\n", document)
+	dataFolder := dataFolder()
 	log.Printf("Data directory [%s]\n", dataFolder)
-	filename := path.Join(dataFolder, document.id)
+	filename := path.Join(dataFolder, document.Id)
 	log.Printf("Document file [%s]\n", filename)
 
 	if err := os.MkdirAll(dataFolder, 0755); err != nil {
@@ -35,11 +31,49 @@ func IndexDocument(document Document) {
 	if err != nil {
 		panic(err)
 	}
+	log.Printf("Writting to file [%s] contents [%b]\n", filename, b)
 	if _, err := f.Write(b); err != nil {
 		panic(err)
 	}
 }
 
 func ListDocuments() []Document {
-	return make([]Document, 0)
+	dataFolder := dataFolder()
+	if err := os.MkdirAll(dataFolder, 0755); err != nil {
+		panic(err)
+	}
+
+	files, err := ioutil.ReadDir(dataFolder)
+	if err != nil {
+		panic(err)
+	}
+
+	var docs []Document
+
+	for _, file := range files {
+		var doc Document
+		filepath := path.Join(dataFolder, file.Name())
+		contents, err := ioutil.ReadFile(filepath)
+		if err != nil {
+			panic(err)
+		}
+		err = json.Unmarshal(contents, &doc)
+		if err != nil {
+			panic(err)
+		}
+		docs = append(docs, doc)
+	}
+
+	return docs
+}
+
+func dataFolder() string {
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+
+	dir := path.Dir(ex)
+	dataFolder := path.Join(dir, DATA_FOLDER)
+	return dataFolder
 }

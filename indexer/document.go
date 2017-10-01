@@ -5,8 +5,8 @@ import (
 )
 
 type Document struct {
-	id   string
-	data map[string]interface{}
+	Id   string                 `json:"id"`
+	Data map[string]interface{} `json:"data"`
 }
 
 func generateId() string {
@@ -23,7 +23,7 @@ func deepCopy(document map[string]interface{}) map[string]interface{} {
 
 func NewDocument(data map[string]interface{}) Document {
 	return Document{
-		id:   generateId(),
-		data: deepCopy(data),
+		Id:   generateId(),
+		Data: deepCopy(data),
 	}
 }

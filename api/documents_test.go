@@ -9,6 +9,24 @@ import (
 	"testing"
 )
 
+func TestDocumentList(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	r := httptest.NewRecorder()
+	c, _ := gin.CreateTestContext(r)
+
+	documentList(c)
+
+	decoder := json.NewDecoder(r.Body)
+
+	var actual []map[string]interface{}
+
+	decoder.Decode(&actual)
+
+	if len(actual) != 0 {
+		t.Errorf("Actual was not empty: [%s]", actual)
+	}
+}
+
 func TestDocumentSave(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	r := httptest.NewRecorder()
@@ -32,24 +50,6 @@ func TestDocumentSave(t *testing.T) {
 	decoder.Decode(&actual)
 
 	if actual["Test"] != "test" {
-		t.Error("Failed to receive message")
-	}
-}
-
-func TestDocumentList(t *testing.T) {
-	gin.SetMode(gin.TestMode)
-	r := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(r)
-
-	documentList(c)
-
-	decoder := json.NewDecoder(r.Body)
-
-	var actual []map[string]interface{}
-
-	decoder.Decode(&actual)
-
-	if len(actual) != 0 {
 		t.Error("Failed to receive message")
 	}
 }
