@@ -8,6 +8,6 @@ import (
 func documentsSave(c *gin.Context) {
 	var document map[string]interface{}
 	c.BindJSON(&document)
-	indexer.IndexDocument(document)
+	indexer.IndexDocument(indexer.NewDocument(document))
 	c.JSON(200, document)
 }
