@@ -1,7 +1,9 @@
 FROM alpine
 
-ADD dist/searchzin /opt/searchzin
+ADD dist/searchzin /opt/searchzin/searchzin
+ADD templates /opt/searchzin/templates
 
 EXPOSE 8080
 
-CMD [ "/opt/searchzin" ]
+WORKDIR "/opt/searchzin"
+CMD [ "/opt/searchzin/searchzin" ]
