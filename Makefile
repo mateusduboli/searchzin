@@ -41,10 +41,13 @@ release-dev: build
 	docker build \
 		--tag "${APP_NAME}:dev" \
 		.
+clean: clean-dist clean-docker
 
-clean:
+clean-dist:
 	go clean
 	rm -rf dist/
+
+clean-docker:
 	docker images -q "${APP_NAME}" | xargs docker rmi -f
 
 publish: clean release
