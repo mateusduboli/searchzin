@@ -5,10 +5,12 @@ APP_NAME ?= "mateusduboli/searchzin"
 install:
 	which dep || brew install dep
 	which golint || go get -u github.com/golang/lint/golint
+	mkdir -p .git/hooks
+	cp scripts/pre-commit .git/hooks/
 	dep ensure
 
 readme:
-	scripts/readme.sh
+	scripts/readme.py
 
 lint:
 	go fmt

@@ -52,7 +52,7 @@ Most of the project toolchain is managed by the
 [`Makefile`](https://github.com/mateusduboli/searchzin/tree/master/Makefile),
 the important targets are:
 
-* `install`: Install `dep` and ensure dependencies
+* `install`: Install needed dependencies and git hooks
 * `readme`: Performs `README.md` inclusion of files
 * `lint`: Performs linting and formatting of the code
 * `test`: Well, compile and run unit tests

@@ -29,5 +29,13 @@ with open(readme_location, 'r') as readme:
         last_replacement_index = replacement['end']
     readme_replaced += readme_contents[last_replacement_index:-1]
 
-with open('README.md', 'w') as f:
+with open('README.md', 'r+') as f:
+    old_readme = f.read()
+    f.seek(0)
     f.write(readme_replaced)
+    f.truncate()
+    if old_readme != readme_replaced:
+        print('README.md modified')
+        exit(1)
+    else:
+        exit(0)
