@@ -86,11 +86,9 @@ constraints are:
 
 ### Index database
 
-Enables fast query of document indices:
+Stores a reverse-index of "terms" and documents
 
-Stores the relation between keywords and the documents related to them.
-
-* Stores `keyword` to document set relations
+* Stores `terms` to document set relations
 * Enable `key` manipulation strategies for queries with keyword approximation
 * Optimized for low density keys with lots of documents
 * Aware of the underlying linux page size to easily fit and be loaded in-memory
