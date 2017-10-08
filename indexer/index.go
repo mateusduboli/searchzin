@@ -9,7 +9,9 @@ import (
 )
 
 const (
-	INDEX_FOLDER = "data/index"
+	INDEX_FOLDER  = "data/index"
+	KEY_SEPARATOR = ":"
+	ID_SEPARATOR  = "\n"
 )
 
 func IndexDocumentFields(document Document) {
@@ -28,15 +30,15 @@ func IndexDocumentFields(document Document) {
 		if err != nil {
 			panic(err)
 		}
-		id := []byte(document.Id)
-		log.Printf("Writting to file [%s] contents [%b]\n", filename, id)
-		if _, err := f.Write(id); err != nil {
+		entry := []byte(document.Data[key].(string) + KEY_SEPARATOR + document.Id + ID_SEPARATOR)
+		log.Printf("Writting to file [%s] contents [%b]\n", filename, entry)
+		if _, err := f.Write(entry); err != nil {
 			panic(err)
 		}
 	}
 }
 
-func ListIndices() map[string][]string {
+func ListIndices() map[string]map[string][]string {
 	indexFolder := indexFolder()
 	if err := os.MkdirAll(indexFolder, 0755); err != nil {
 		panic(err)
@@ -47,21 +49,35 @@ func ListIndices() map[string][]string {
 		panic(err)
 	}
 
-	indexes := make(map[string][]string)
+	indexes := make(map[string]map[string][]string)
 
 	for _, file := range files {
 		if file.IsDir() {
 			continue
 		}
-		filepath := path.Join(indexFolder, file.Name())
+		field := file.Name()
+		filepath := path.Join(indexFolder, field)
 		contents, err := ioutil.ReadFile(filepath)
-		documentIds := strings.Split(string(contents), "\n")
 		if err != nil {
 			panic(err)
 		}
-		indexes[file.Name()] = documentIds
+		if indexes[field] == nil {
+			indexes[field] = make(map[string][]string)
+		}
+		entries := strings.Split(string(contents), ID_SEPARATOR)
+		for _, entry := range entries {
+			if entry == "" {
+				continue
+			}
+			split := strings.Split(entry, KEY_SEPARATOR)
+			key, id := split[0], split[1]
+			if indexes[field][key] == nil {
+				indexes[field][key] = []string{id}
+			} else {
+				indexes[field][key] = append(indexes[field][key], id)
+			}
+		}
 	}
-
 	return indexes
 }
 
