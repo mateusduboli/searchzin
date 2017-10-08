@@ -3,7 +3,6 @@ package http
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/mateusduboli/searchzin/indexer"
-	"log"
 	"net/http"
 )
 
