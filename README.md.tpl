@@ -86,11 +86,7 @@ constraints are:
 
 ### Index database
 
-Given a new document understands it and saves it into the document database,
-after feeds the related indexes.
-
-* Knows which fields are indexed and how
-* Knows the document structure and can related that to the indexes
+Enables fast query of document indices:
 
 Stores the relation between keywords and the documents related to them.
 
@@ -100,6 +96,12 @@ Stores the relation between keywords and the documents related to them.
 * Aware of the underlying linux page size to easily fit and be loaded in-memory
 
 ### Indexing service
+
+Given a new document understands it and saves both on the index database and the
+document database.
+
+* Knows which fields are indexed and how
+* Knows the document structure and can related that to the indexes
 
 ### Query parser
 
