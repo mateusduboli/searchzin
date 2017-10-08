@@ -1,3 +1,38 @@
 #!/bin/bash
+NAMES=(
+  João
+  Ricardo
+  Joana
+  Larissa
+  Isabela
+  Otávio
+  Jussara
+  Agnes
+  Tatiana
+  Thiago
+  Mateus
+  Olavo
+  Teodoro
+  Luis
+  Gustavo
+)
 
-curl -XPOST -H 'Content-Type: application/json' -d '{"id": 4, "name": "João"}' localhost:8080/v1/documents
+PROFESSIONS=(
+  Estudante
+  Programador
+  Gerente
+  Atendente
+)
+
+NAME_INDEX=$((RANDOM % ${#NAMES[@]}))
+PROF_INDEX=$((RANDOM % ${#PROFESSIONS[@]}))
+
+DOCUMENT=$(cat <<EOF
+{
+  "name": "${NAMES[$NAME_INDEX]}",
+  "profession": "${PROFESSIONS[$PROF_INDEX]}"
+}
+EOF
+)
+
+curl -XPOST -H 'Content-Type: application/json' -d "$DOCUMENT" localhost:8080/v1/documents
