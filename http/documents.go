@@ -16,3 +16,8 @@ func documentList(c *gin.Context) {
 	documents := indexer.ListDocuments()
 	c.JSON(200, documents)
 }
+
+func indexList(c *gin.Context) {
+	indeces := indexer.ListIndices()
+	c.JSON(200, indeces)
+}
