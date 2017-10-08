@@ -6,18 +6,15 @@ import (
 )
 
 func documentSave(c *gin.Context) {
-	var document map[string]interface{}
-	c.BindJSON(&document)
-	indexer.IndexDocument(indexer.NewDocument(document))
+	var rawDocument map[string]interface{}
+	c.BindJSON(&rawDocument)
+	document := indexer.NewDocument(rawDocument)
+	indexer.IndexDocument(document)
+	indexer.IndexDocumentFields(document)
 	c.JSON(200, document)
 }
 
 func documentList(c *gin.Context) {
 	documents := indexer.ListDocuments()
 	c.JSON(200, documents)
-}
-
-func indexList(c *gin.Context) {
-	indeces := indexer.ListIndices()
-	c.JSON(200, indeces)
 }

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"github.com/mateusduboli/searchzin/indexer"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -45,11 +46,11 @@ func TestDocumentSave(t *testing.T) {
 
 	decoder := json.NewDecoder(r.Body)
 
-	var actual map[string]interface{}
+	var actual indexer.Document
 
 	decoder.Decode(&actual)
 
-	if actual["Test"] != "test" {
+	if actual.Data["Test"] != "test" {
 		t.Error("Failed to receive message")
 	}
 }
