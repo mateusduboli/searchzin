@@ -18,3 +18,17 @@ func documentList(c *gin.Context) {
 	documents := indexer.ListDocuments()
 	c.JSON(200, documents)
 }
+
+func documentGet(c *gin.Context) {
+	id := c.Param("id")
+	document, err := indexer.GetDocument(id)
+	if err == nil {
+		if id != "" {
+			c.JSON(200, document)
+		} else {
+			c.JSON(404, map[string]string{})
+		}
+	} else {
+		c.JSON(500, err)
+	}
+}
