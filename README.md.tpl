@@ -128,7 +128,14 @@ After having a structured plan the query then retrieves effective data from the
 * Retrieves the documents
 * Stores the query results in a file to be queried later using "cold" storage
 
-## Query language
+### Query language
 
 This query language is heavily based on lucene's, to simplify design and
 understand what tradeoffs were made.
+
+## Test scenario
+
+The current test scenario that will be used will be indexing podcasts by name,
+content and tags.
+
+The base usage can be found in `searchzin-example`.

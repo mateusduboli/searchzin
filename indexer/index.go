@@ -81,6 +81,16 @@ func ListIndices() map[string]map[string][]string {
 	return indexes
 }
 
+func GetIndex(field string) map[string][]string {
+	indexes := ListIndices()
+	return indexes[field]
+}
+
+func GetIndexTerm(field string, term string) []string {
+	indexes := ListIndices()
+	return indexes[field][term]
+}
+
 func indexFolder() string {
 	ex, err := os.Executable()
 	if err != nil {

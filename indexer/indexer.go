@@ -37,6 +37,19 @@ func IndexDocument(document Document) {
 	}
 }
 
+func GetDocument(id string) Document {
+	dataFolder := dataFolder()
+	filename := path.Join(dataFolder, id)
+
+	var doc Document
+	contents, err := ioutil.ReadFile(filename)
+	if err != nil {
+		panic(err)
+	}
+	err = json.Unmarshal(contents, &doc)
+	return doc
+}
+
 func ListDocuments() []Document {
 	dataFolder := dataFolder()
 	if err := os.MkdirAll(dataFolder, 0755); err != nil {
@@ -68,6 +81,14 @@ func ListDocuments() []Document {
 	}
 
 	return docs
+}
+
+func GetDocuments(ids []string) []Document {
+	result := []Document{}
+	for _, id := range ids {
+		result = append(result, GetDocument(id))
+	}
+	return result
 }
 
 func dataFolder() string {
