@@ -35,4 +35,4 @@ DOCUMENT=$(cat <<EOF
 EOF
 )
 
-curl -XPOST -H 'Content-Type: application/json' -d "$DOCUMENT" localhost:8080/v1/documents
+curl -XPOST -H 'Content-Type: application/json' -d "$DOCUMENT" localhost:8080/api/v1/documents
