@@ -15,5 +15,5 @@ func Api(r *gin.Engine) {
 	v1.GET("/indexes", indexList)
 	v1.GET("/indexes/:field", indexGet)
 	v1.GET("/indexes/:field/:term", indexGetWithTerm)
-	v1.GET("/search/:field/:term", searchTerm)
+	v1.GET("/search", searchTerm)
 }

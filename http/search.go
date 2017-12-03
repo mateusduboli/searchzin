@@ -6,8 +6,11 @@ import (
 )
 
 func searchTerm(c *gin.Context) {
-	field := c.Param("field")
-	term := c.Param("term")
+	field := c.Query("field")
+	term := c.Query("term")
+	if term == "" || field == "" {
+		c.JSON(400, gin.H{"status": "Missing query parameters"})
+	}
 	ids := indexer.GetIndexTerm(field, term)
 	documents, err := indexer.GetDocuments(ids)
 	if err != nil {
