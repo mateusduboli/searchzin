@@ -2,6 +2,8 @@
 -->
 # Searchzin
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/mateusduboli/searchzin)](https://goreportcard.com/report/github.com/mateusduboli/searchzin)
+
 A simple search engine implementation.
 
 ## Motivation
@@ -139,3 +141,7 @@ The current test scenario that will be used will be indexing podcasts by name,
 content and tags.
 
 The base usage can be found in `searchzin-example`.
+
+## License
+
+searchzin is available under the [MIT license](LICENSE).
