@@ -34,7 +34,7 @@ form `-C key=value`, the second form overrides the first.
 
 Configuration defaults:
 
-<!-- include yml config/config.yml -->
+<!-- include yml config.yml -->
 
 ## Development
 
