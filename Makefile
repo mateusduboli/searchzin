@@ -25,6 +25,9 @@ build:
 	cp -R templates dist/
 
 run:
+	go run main.go
+
+run-docker:
 	docker run \
 		-p 8080:8080 \
 		-v "${PWD}/dist:/opt/searchzin" \
@@ -42,7 +45,7 @@ release: clean build
 release-dev: build
 	docker build \
 		--tag "${APP_NAME}:dev" \
-		.
+
 clean: clean-dist clean-docker
 
 clean-dist:
