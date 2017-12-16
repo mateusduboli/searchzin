@@ -52,9 +52,9 @@ the important targets are:
 * `lint`: Performs linting and formatting of the code
 * `test`: Well, compile and run unit tests
 * `build`: Creates a `linux` distributable folder in `dist`
-* `run`: Runs a docker container with the `dist` executable
-* `release`: Creates a release version on the `dist` folder
-* `release-dev`: Creates a release version to be used in `run`
+* `run`: Runs the code using `go run`
+* `run-dev`: Creates and runs a docker container
+* `release`: Creates a release docker image
 * `publish`: Publishes the docker image on dockerhub using the contents of the
     `VERSION` file as the version
 * `publish-latest`: Publishes the docker image on dockerhub with the `latest` tag

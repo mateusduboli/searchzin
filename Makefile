@@ -27,7 +27,10 @@ build:
 run:
 	go run main.go
 
-run-docker:
+run-dev: build
+	docker build \
+		--tag "${APP_NAME}:dev" \
+		.
 	docker run \
 		-p 8080:8080 \
 		-v "${PWD}/dist:/opt/searchzin" \
@@ -41,10 +44,6 @@ release: clean build
 		--no-cache \
 		--tag "${APP_NAME}:${VERSION}" \
 		.
-
-release-dev: build
-	docker build \
-		--tag "${APP_NAME}:dev" \
 
 clean: clean-dist clean-docker
 
