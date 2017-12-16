@@ -19,9 +19,9 @@ func documentDelete(c *gin.Context) {
 	has_deleted, err := indexer.DeleteDocument(id)
 	if err == nil {
 		if has_deleted {
-			c.JSON(204)
+			c.JSON(204, nil)
 		} else {
-			c.JSON(404)
+			c.JSON(404, nil)
 		}
 	} else {
 		c.JSON(500, err)

@@ -3,7 +3,6 @@ package indexer
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"os"
 	"path"
 )
@@ -14,6 +13,7 @@ const (
 
 func IndexDocument(document Document) {
 	filename := documentFile(document.Id)
+	dataFolder := dataFolder()
 
 	if err := os.MkdirAll(dataFolder, 0755); err != nil {
 		panic(err)
@@ -48,7 +48,7 @@ func GetDocument(id string) (Document, error) {
 }
 
 func DeleteDocument(id string) (bool, error) {
-	document, err := GetDocument(id)
+	_, err := GetDocument(id)
 	if err != nil {
 		return false, err
 	}
@@ -57,6 +57,8 @@ func DeleteDocument(id string) (bool, error) {
 	err = os.Remove(documentFilename)
 
 	refreshIndex()
+
+	return true, nil
 }
 
 func refreshIndex() {
