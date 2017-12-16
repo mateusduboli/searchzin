@@ -62,9 +62,9 @@ the important targets are:
 * `run`: Runs a docker container with the `dist` executable
 * `release`: Creates a release version on the `dist` folder
 * `release-dev`: Creates a release version to be used in `run`
-* `publish`: Publishes the docker image in dockerhub using the git sha as
-    version
-* `publish-latest`: Publishes the docker image in dockerhub with the `latest` tag
+* `publish`: Publishes the docker image on dockerhub using the contents of the
+    `VERSION` file as the version
+* `publish-latest`: Publishes the docker image on dockerhub with the `latest` tag
 *  (*TODO*) `watch`: Performs `lint` and `test` on file modification
 *  (*TODO*) `func-test`: Performs functional tests inside the `features` folder
 

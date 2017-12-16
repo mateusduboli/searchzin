@@ -1,5 +1,5 @@
 TEST_REGEX ?= '.'
-VERSION ?= $(shell git show -s --format=%h))
+VERSION ?= $(shell cat VERSION))
 APP_NAME ?= "mateusduboli/searchzin"
 
 install:
