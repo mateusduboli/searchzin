@@ -13,11 +13,7 @@ const (
 )
 
 func IndexDocument(document Document) {
-	log.Printf("Indexing document [%s]\n", document)
-	dataFolder := dataFolder()
-	log.Printf("Data directory [%s]\n", dataFolder)
-	filename := path.Join(dataFolder, document.Id)
-	log.Printf("Document file [%s]\n", filename)
+	filename := documentFile(document.Id)
 
 	if err := os.MkdirAll(dataFolder, 0755); err != nil {
 		panic(err)
@@ -31,15 +27,13 @@ func IndexDocument(document Document) {
 	if err != nil {
 		panic(err)
 	}
-	log.Printf("Writting to file [%s] contents [%b]\n", filename, b)
 	if _, err := f.Write(b); err != nil {
 		panic(err)
 	}
 }
 
 func GetDocument(id string) (Document, error) {
-	dataFolder := dataFolder()
-	filename := path.Join(dataFolder, id)
+	filename := documentFile(id)
 
 	var doc Document
 	contents, err := ioutil.ReadFile(filename)
@@ -53,6 +47,20 @@ func GetDocument(id string) (Document, error) {
 	return doc, nil
 }
 
+func DeleteDocument(id string) (bool, error) {
+	document, err := GetDocument(id)
+	if err != nil {
+		return false, err
+	}
+	documentFilename := documentFile(id)
+
+	err = os.Remove(documentFilename)
+
+	refreshIndex()
+}
+
+func refreshIndex() {
+}
 func GetDocuments(ids []string) ([]Document, error) {
 	result := []Document{}
 	for _, id := range ids {
@@ -96,6 +104,11 @@ func ListDocuments() []Document {
 	}
 
 	return docs
+}
+
+func documentFile(id string) string {
+	dataFolder := dataFolder()
+	return path.Join(dataFolder, id)
 }
 
 func dataFolder() string {

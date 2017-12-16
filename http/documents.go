@@ -14,6 +14,20 @@ func documentSave(c *gin.Context) {
 	c.JSON(200, document)
 }
 
+func documentDelete(c *gin.Context) {
+	id := c.Param("id")
+	has_deleted, err := indexer.DeleteDocument(id)
+	if err == nil {
+		if has_deleted {
+			c.JSON(204)
+		} else {
+			c.JSON(404)
+		}
+	} else {
+		c.JSON(500, err)
+	}
+}
+
 func documentList(c *gin.Context) {
 	documents := indexer.ListDocuments()
 	c.JSON(200, documents)
