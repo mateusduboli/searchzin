@@ -2,7 +2,7 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/indexer"
+	"github.com/mateusduboli/searchzin/index"
 )
 
 func searchTerm(c *gin.Context) {
@@ -11,8 +11,8 @@ func searchTerm(c *gin.Context) {
 	if term == "" || field == "" {
 		c.JSON(400, gin.H{"status": "Missing query parameters"})
 	}
-	ids := indexer.GetIndexTerm(field, term)
-	documents, err := indexer.GetDocuments(ids)
+	ids := index.GetIndexTerm(field, term)
+	documents, err := index.GetDocuments(ids)
 	if err != nil {
 		c.JSON(500, err)
 	}

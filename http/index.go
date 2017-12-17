@@ -2,17 +2,17 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/indexer"
+	"github.com/mateusduboli/searchzin/index"
 )
 
 func indexList(c *gin.Context) {
-	indeces := indexer.ListIndices()
+	indeces := index.ListIndices()
 	c.JSON(200, indeces)
 }
 
 func indexGet(c *gin.Context) {
 	field := c.Param("field")
-	index := indexer.GetIndex(field)
+	index := index.GetIndex(field)
 	if index != nil {
 		c.JSON(200, index)
 	} else {
@@ -23,7 +23,7 @@ func indexGet(c *gin.Context) {
 func indexGetWithTerm(c *gin.Context) {
 	field := c.Param("field")
 	term := c.Param("term")
-	index := indexer.GetIndexTerm(field, term)
+	index := index.GetIndexTerm(field, term)
 	if index != nil {
 		c.JSON(200, index)
 	} else {

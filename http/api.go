@@ -5,7 +5,7 @@ import "github.com/gin-gonic/gin"
 func Api(r *gin.Engine) {
 	r.LoadHTMLGlob("templates/*")
 
-	r.GET("/", index)
+	r.GET("/", indexPage)
 
 	v1 := r.Group("api/v1")
 	v1.GET("/ping", ping)

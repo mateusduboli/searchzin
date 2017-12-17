@@ -1,6 +1,9 @@
-package indexer
+package index
 
-import "testing"
+import (
+	"github.com/mateusduboli/searchzin/document"
+	"testing"
+)
 
 func TestIndexDocument(t *testing.T) {
 	document := NewDocument(map[string]interface{}{

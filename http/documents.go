@@ -2,21 +2,22 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/indexer"
+	"github.com/mateusduboli/searchzin/document"
+	"github.com/mateusduboli/searchzin/index"
 )
 
 func documentSave(c *gin.Context) {
 	var rawDocument map[string]interface{}
 	c.BindJSON(&rawDocument)
-	document := indexer.NewDocument(rawDocument)
-	indexer.IndexDocument(document)
-	indexer.IndexDocumentFields(document)
+	document := document.NewDocument(rawDocument)
+	index.IndexDocument(document)
+	index.IndexDocumentFields(document)
 	c.JSON(200, document)
 }
 
 func documentDelete(c *gin.Context) {
 	id := c.Param("id")
-	has_deleted, err := indexer.DeleteDocument(id)
+	has_deleted, err := index.DeleteDocument(id)
 	if err == nil {
 		if has_deleted {
 			c.JSON(204, nil)
@@ -29,13 +30,13 @@ func documentDelete(c *gin.Context) {
 }
 
 func documentList(c *gin.Context) {
-	documents := indexer.ListDocuments()
+	documents := index.ListDocuments()
 	c.JSON(200, documents)
 }
 
 func documentGet(c *gin.Context) {
 	id := c.Param("id")
-	document, err := indexer.GetDocument(id)
+	document, err := index.GetDocument(id)
 	if err == nil {
 		if id != "" {
 			c.JSON(200, document)

@@ -1,4 +1,4 @@
-package indexer
+package document
 
 import (
 	"github.com/satori/go.uuid"
