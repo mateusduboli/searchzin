@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/indexer"
+	"github.com/mateusduboli/searchzin/document"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -46,7 +46,7 @@ func TestDocumentSave(t *testing.T) {
 
 	decoder := json.NewDecoder(r.Body)
 
-	var actual indexer.Document
+	var actual document.Document
 
 	decoder.Decode(&actual)
 
