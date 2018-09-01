@@ -28,6 +28,7 @@ After that you can look into `http://localhost:8080` to see the search page.
 
 ## Configuration
 
+
 The configuration can be made by either the configuration file located by
 default in `/etc/searchzin/config.yml`, or providing configuration keys in the
 form `-C key=value`, the second form overrides the first.
@@ -80,7 +81,7 @@ It's responsible to store and give id's to newly created documents. The
 constraints are:
 
 * Stores documents and their `id`s
-* Enables `id` generation with little to no collisions
+* Enables `id` generation with no collisions for persistence
 * Efective document storing algorithm, being optimized for fast reads and fast
     enought writes
 * Aware of the underlying storage unit, being it `ssd` or `hdd`
@@ -110,6 +111,8 @@ data structure.
 
 * Parses a string given by the user and turns it into a graph
 * The DSL will be similar to [`lucene`'s](https://lucene.apache.org/)
+* Support for ANSI SQL queries
+* Support for document key lookups
 
 ### Query planner
 
