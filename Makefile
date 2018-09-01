@@ -6,7 +6,7 @@ install:
 	which dep || brew install dep
 	which golint || go get -u github.com/golang/lint/golint
 	mkdir -p .git/hooks
-	ln -s ${PWD}/scripts/pre-commit .git/hooks
+	ln -s -f ${PWD}/scripts/pre-commit .git/hooks
 	dep ensure
 
 readme:
