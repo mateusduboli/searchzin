@@ -2,7 +2,7 @@ TEST_REGEX ?= '.'
 VERSION ?= $(shell cat VERSION))
 APP_NAME ?= "mateusduboli/searchzin"
 
-all: test build
+all: install test build
 
 install:
 	which dep || go get -u github.com/golang/dep/cmd/dep
