@@ -3,7 +3,7 @@ VERSION ?= $(shell cat VERSION))
 APP_NAME ?= "mateusduboli/searchzin"
 
 install:
-	which dep || brew install dep
+	which dep || go get -u github.com/golang/dep/cmd/dep
 	which golint || go get -u github.com/golang/lint/golint
 	mkdir -p .git/hooks
 	ln -s -f ${PWD}/scripts/pre-commit .git/hooks
