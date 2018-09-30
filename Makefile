@@ -2,6 +2,8 @@ TEST_REGEX ?= '.'
 VERSION ?= $(shell cat VERSION))
 APP_NAME ?= "mateusduboli/searchzin"
 
+all: test build
+
 install:
 	which dep || go get -u github.com/golang/dep/cmd/dep
 	which golint || go get -u github.com/golang/lint/golint
@@ -21,7 +23,7 @@ test:
 
 build:
 	mkdir -p dist
-	env GOOS=linux go build -o dist/searchzin .
+	go build -o dist/searchzin .
 	cp -R templates dist/
 
 run:
