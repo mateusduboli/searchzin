@@ -6,7 +6,7 @@ all: install test build
 
 install:
 	which dep || go get github.com/golang/dep/cmd/dep
-	which golint || go get github.com/golang/lint/golint
+	which golint || go get golang.org/x/lint/golint
 	mkdir -p .git/hooks
 	ln -s -f ${PWD}/scripts/pre-commit .git/hooks
 	dep ensure
