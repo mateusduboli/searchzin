@@ -1,3 +1,15 @@
 language: go
 go:
-  - "1.10.x"
+  - '1.10.x'
+
+deploy:
+  provider: 'releases'
+  file_glob: true
+  file: 'dist/*'
+  skip_cleanup: true
+  draft: true
+  name: 
+  body:
+  on:
+    tags: true
+    branch:
