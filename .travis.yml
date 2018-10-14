@@ -1,15 +1,13 @@
 language: go
 go:
-  - '1.10.x'
-
+- 1.10.x
 deploy:
-  provider: 'releases'
+  provider: releases
+  api_key:
+    secure: pbTRdn1BBm4pWwlgDXeViUDOgFimGs5QJleRlLDQdCq7n9wgkIgwXKqnn6YjDM1ALKvSukso2Zvw2+rB68g8Lp+bhmpFgoyCyUViDajbBrBwFfAlcSQ+TivMMB6jMPGbrKP6HAiP7DXCqtQ8sAJ+7IkjJozb/JPVJiac1bPYskafY8do/K9aKAvitfdyPMIP6yRC4FqQBpMie3y8xOIZgGMQJx/5wfmMZ2a2NQC3qvBiPYcNxCTBGoR2vNJYpZTkJ2xlrDFwMCA/5bsTgfkeBqh1mbV7C349D7twXsuWKTym8VPQwie/+8QbIMHoP8TFiXIEQTdb8LkEp3fW8elJTzuigrbm8/cfnA58xMdrk+hi8rfG5LDZJYHsZyjtKbgba9TZXKiM1tjp5iSNyV9m6vDVSdqykrvjb8PW4UQSCjnb5IZBHu+KYgL8rSHJbgR6bBsOL+BBxRuJESGOLxZzgXWe6sjEFBRiNf7q+rn+mcrRanV8EF72rTTIrHNmRNn9jpC1CYxiZqqdD02VGhA8Gv0GGAc2Iv5SXdDCkxAxQ9etOdw1SYjNbdAA/LVyoY333vzma1p4JYt3vBltQmzePl+P9aZRviBx2wiedRNxhLTI1IWwbwhDvb0XNYRlwMOE/5bUOnf/GmMx4tRSo9agGXJI609Qnt5K+7A8MVyCm3I=
   file_glob: true
-  file: 'dist/*'
+  file: dist/*
   skip_cleanup: true
-  draft: true
-  name: 
-  body:
   on:
-    tags: true
-    branch:
+    repo: mateusduboli/searchzin
+    branch: travis-ci-testing
