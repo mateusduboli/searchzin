@@ -5,8 +5,8 @@ APP_NAME ?= "mateusduboli/searchzin"
 all: install test build
 
 install:
-	which dep || go get -u github.com/golang/dep/cmd/dep
-	which golint || go get -u github.com/golang/x/lint/golint
+	which dep || go get github.com/golang/dep/cmd/dep
+	which golint || go get github.com/golang/lint/golint
 	mkdir -p .git/hooks
 	ln -s -f ${PWD}/scripts/pre-commit .git/hooks
 	dep ensure
