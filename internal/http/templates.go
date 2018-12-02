@@ -2,7 +2,7 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/index"
+	"github.com/mateusduboli/searchzin/internal/index"
 	"net/http"
 )
 

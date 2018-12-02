@@ -1,11 +1,11 @@
-package http
+package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/index"
+	"github.com/mateusduboli/searchzin/internal/index"
 )
 
-func searchTerm(c *gin.Context) {
+func SearchTerm(c *gin.Context) {
 	field := c.Query("field")
 	term := c.Query("term")
 	if term == "" || field == "" {

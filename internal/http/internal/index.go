@@ -1,16 +1,16 @@
-package http
+package internal
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/index"
+	"github.com/mateusduboli/searchzin/internal/index"
 )
 
-func indexList(c *gin.Context) {
+func IndexList(c *gin.Context) {
 	indeces := index.ListIndices()
 	c.JSON(200, indeces)
 }
 
-func indexGet(c *gin.Context) {
+func IndexGet(c *gin.Context) {
 	field := c.Param("field")
 	index := index.GetIndex(field)
 	if index != nil {
@@ -20,7 +20,7 @@ func indexGet(c *gin.Context) {
 	}
 }
 
-func indexGetWithTerm(c *gin.Context) {
+func IndexGetWithTerm(c *gin.Context) {
 	field := c.Param("field")
 	term := c.Param("term")
 	index := index.GetIndexTerm(field, term)

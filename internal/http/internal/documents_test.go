@@ -1,10 +1,10 @@
-package http
+package internal
 
 import (
 	"bytes"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/document"
+	"github.com/mateusduboli/searchzin/internal/document"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -15,7 +15,7 @@ func TestDocumentList(t *testing.T) {
 	r := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(r)
 
-	documentList(c)
+	DocumentList(c)
 
 	decoder := json.NewDecoder(r.Body)
 
@@ -42,7 +42,7 @@ func TestDocumentSave(t *testing.T) {
 
 	c.Request, _ = http.NewRequest("POST", "/", b)
 
-	documentSave(c)
+	DocumentSave(c)
 
 	decoder := json.NewDecoder(r.Body)
 

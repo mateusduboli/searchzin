@@ -1,21 +1,23 @@
-package http
+package internal
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/document"
-	"github.com/mateusduboli/searchzin/index"
+	"github.com/mateusduboli/searchzin/internal/document"
+	"github.com/mateusduboli/searchzin/internal/index"
 )
 
-func documentSave(c *gin.Context) {
+func DocumentSave(c *gin.Context) {
 	var rawDocument map[string]interface{}
 	c.BindJSON(&rawDocument)
+
 	document := document.NewDocument(rawDocument)
+
 	index.IndexDocument(document)
 	index.IndexDocumentFields(document)
 	c.JSON(200, document)
 }
 
-func documentDelete(c *gin.Context) {
+func DocumentDelete(c *gin.Context) {
 	id := c.Param("id")
 	has_deleted, err := index.DeleteDocument(id)
 	if err == nil {
@@ -29,12 +31,12 @@ func documentDelete(c *gin.Context) {
 	}
 }
 
-func documentList(c *gin.Context) {
+func DocumentList(c *gin.Context) {
 	documents := index.ListDocuments()
 	c.JSON(200, documents)
 }
 
-func documentGet(c *gin.Context) {
+func DocumentGet(c *gin.Context) {
 	id := c.Param("id")
 	document, err := index.GetDocument(id)
 	if err == nil {

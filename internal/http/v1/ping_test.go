@@ -1,4 +1,4 @@
-package http
+package v1
 
 import (
 	"github.com/gin-gonic/gin"
@@ -11,7 +11,7 @@ func TestPing(t *testing.T) {
 	r := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(r)
 
-	ping(c)
+	Ping(c)
 
 	if r.Body.String() != "{\"message\":\"pong\"}" {
 		t.Error("Message body is different")
