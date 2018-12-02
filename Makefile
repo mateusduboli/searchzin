@@ -24,8 +24,13 @@ build:
 	env GOOS=linux go build -o dist/searchzin .
 	cp -R templates dist/
 
-run:
-	go run main.go
+build-searchzin:
+	go build cmd/searchzin/main.go
+
+run-searchzin:
+	go run cmd/searchzin/main.go
+
+run: run-searchzin
 
 run-dev: build
 	docker build \
