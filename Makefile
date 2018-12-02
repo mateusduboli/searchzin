@@ -13,19 +13,18 @@ readme:
 	scripts/readme.py
 
 lint:
-	go fmt
-	golint
+	go fmt ./cmd/* ./pkg/*
+	golint ./cmd/* ./pkg/*
 
 test:
 	go test -v -run ${TEST_REGEX} ./...
 
-build:
-	mkdir -p dist
-	env GOOS=linux go build -o dist/searchzin .
-	cp -R templates dist/
+build: build-searchzin
 
 build-searchzin:
-	go build cmd/searchzin/main.go
+	mkdir -p dist/web
+	env GOOS=linux go build -o dist/searchzin cmd/searchzin/main.go
+	cp -R web/templates dist/web/
 
 run-searchzin:
 	go run cmd/searchzin/main.go

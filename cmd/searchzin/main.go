@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/internal/http"
+	"github.com/mateusduboli/searchzin/pkg/http"
 )
 
 func main() {

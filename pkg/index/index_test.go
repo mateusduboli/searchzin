@@ -1,7 +1,7 @@
 package index
 
 import (
-	"github.com/mateusduboli/searchzin/internal/document"
+	"github.com/mateusduboli/searchzin/pkg/document"
 	"testing"
 )
 

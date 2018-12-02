@@ -1,8 +1,8 @@
-package internal
+package private
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/internal/index"
+	"github.com/mateusduboli/searchzin/pkg/index"
 )
 
 func IndexList(c *gin.Context) {

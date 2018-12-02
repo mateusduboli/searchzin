@@ -1,9 +1,9 @@
-package internal
+package private
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/internal/document"
-	"github.com/mateusduboli/searchzin/internal/index"
+	"github.com/mateusduboli/searchzin/pkg/document"
+	"github.com/mateusduboli/searchzin/pkg/index"
 )
 
 func DocumentSave(c *gin.Context) {

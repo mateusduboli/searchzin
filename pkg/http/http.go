@@ -2,8 +2,8 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	. "github.com/mateusduboli/searchzin/internal/http/internal"
-	. "github.com/mateusduboli/searchzin/internal/http/v1"
+	. "github.com/mateusduboli/searchzin/pkg/http/private"
+	. "github.com/mateusduboli/searchzin/pkg/http/v1"
 )
 
 func Searchzin(r *gin.Engine) {
@@ -30,10 +30,10 @@ func Searchzin(r *gin.Engine) {
 	v1.GET("/search", SearchTerm)
 
 	// Internal structure of the database
-	internal := api.Group("internal")
+	private := api.Group("private")
 
 	// Indexes
-	internal.GET("/indexes", IndexList)
-	internal.GET("/indexes/:field", IndexGet)
-	internal.GET("/indexes/:field/:term", IndexGetWithTerm)
+	private.GET("/indexes", IndexList)
+	private.GET("/indexes/:field", IndexGet)
+	private.GET("/indexes/:field/:term", IndexGetWithTerm)
 }

@@ -2,7 +2,7 @@ package index
 
 import (
 	"encoding/json"
-	. "github.com/mateusduboli/searchzin/internal/document"
+	. "github.com/mateusduboli/searchzin/pkg/document"
 	"io/ioutil"
 	"log"
 	"os"

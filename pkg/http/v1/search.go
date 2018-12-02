@@ -2,7 +2,7 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/internal/index"
+	"github.com/mateusduboli/searchzin/pkg/index"
 )
 
 func SearchTerm(c *gin.Context) {

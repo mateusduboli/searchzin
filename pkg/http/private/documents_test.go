@@ -1,10 +1,10 @@
-package internal
+package private
 
 import (
 	"bytes"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"github.com/mateusduboli/searchzin/internal/document"
+	"github.com/mateusduboli/searchzin/pkg/document"
 	"net/http"
 	"net/http/httptest"
 	"testing"
